@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>青岛旅行攻略</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#050810;--card:rgba(255,255,255,.04);--card-h:rgba(255,255,255,.08);--bd:rgba(255,255,255,.07);--txt:#e2e8f0;--dim:#7a8aaa;--c1:#06b6d4;--c2:#8b5cf6;--c3:#f59e0b;--c4:#10b981;--c5:#ec4899;--sh:0 8px 32px rgba(0,0,0,.4)}
+@media(prefers-color-scheme:light){:root{--bg:#eef2f7;--card:rgba(255,255,255,.72);--card-h:rgba(255,255,255,.9);--bd:rgba(0,0,0,.06);--txt:#1a202c;--dim:#5a6a8a;--sh:0 6px 24px rgba(0,0,0,.06)}}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden;min-height:100vh}
+/* Aurora BG */
+.aurora{position:fixed;inset:0;z-index:-3;overflow:hidden}
+.aurora::before,.aurora::after,.aurora div{content:'';position:absolute;border-radius:50%;filter:blur(100px);opacity:.18;animation:drift 25s ease-in-out infinite}
+.aurora::before{width:500px;height:500px;background:var(--c1);top:-150px;left:-80px}
+.aurora::after{width:600px;height:600px;background:var(--c2);bottom:-200px;right:-120px;animation-delay:-12s}
+.aurora div{width:400px;height:400px;background:var(--c5);top:40%;left:40%;animation-delay:-6s;opacity:.08}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(80px,-60px) scale(1.15)}66%{transform:translate(-50px,80px) scale(.85)}}
+/* Grid overlay */
+.grid-bg{position:fixed;inset:0;z-index:-2;background-image:linear-gradient(rgba(6,182,212,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(6,182,212,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+/* Particles */
+.particles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.particles span{position:absolute;border-radius:50%;background:rgba(6,182,212,.12);animation:rise linear infinite}
+@keyframes rise{from{transform:translateY(100vh);opacity:0}10%{opacity:1}90%{opacity:1}to{transform:translateY(-10vh);opacity:0}}
+/* Progress */
+.progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:100;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3),var(--c4));box-shadow:0 0 12px var(--c1);transition:width .15s}
+.app{max-width:680px;margin:0 auto;padding:12px;position:relative}
+/* Wave divider */
+.wave{display:block;width:100%;height:32px;margin:8px 0;opacity:.4}
+.wave path{fill:none;stroke:url(#wg);stroke-width:2}
+/* Hero */
+.hero{position:relative;border-radius:24px;overflow:hidden;margin-bottom:8px;box-shadow:var(--sh)}
+.hero-bg{width:100%;height:260px;object-fit:cover;display:block;transition:transform .8s ease-out}
+.hero:hover .hero-bg{transform:scale(1.08)}
+.hero-glow{position:absolute;inset:0;background:linear-gradient(135deg,rgba(6,182,212,.2),rgba(139,92,246,.15),rgba(245,158,11,.08));mix-blend-mode:overlay;pointer-events:none}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(5,8,16,.95) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px 26px}
+.hero-badge{position:absolute;top:16px;right:16px;background:linear-gradient(135deg,var(--c1),var(--c2));color:#fff;border-radius:20px;padding:5px 18px;font-size:.66em;font-weight:800;box-shadow:0 4px 20px rgba(6,182,212,.4);animation:pulse 2.5s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(6,182,212,.4)}50%{box-shadow:0 4px 28px rgba(139,92,246,.5)}}
+.hero h1{font-size:1.7em;font-weight:900;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.7);letter-spacing:1px;animation:slideUp .8s .2s both}
+.hero-sub{font-size:.78em;color:rgba(255,255,255,.8);margin-top:4px;animation:slideUp .8s .4s both}
+.hero-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;animation:slideUp .8s .6s both}
+.hero-tags span{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:.62em;color:#fff;transition:all .3s}
+.hero-tags span:hover{transform:translateY(-3px) scale(1.08);background:rgba(255,255,255,.22)}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+/* Gradient text */
+.grad-text{background:linear-gradient(135deg,var(--c1),var(--c2),var(--c5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* Section label */
+.sec-label{font-size:.62em;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--dim);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--bd),transparent)}
+/* Info Row (transport + stay) */
+.info-row{display:flex;gap:8px;margin-bottom:8px}
+.info-card{flex:1;border-radius:14px;padding:12px 14px;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--bd);transition:all .3s;position:relative;overflow:hidden}
+.info-card:hover{transform:translateY(-3px);box-shadow:var(--sh);background:var(--card-h)}
+.info-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.info-card.t-go::before{background:linear-gradient(90deg,var(--c1),transparent)}
+.info-card.t-back::before{background:linear-gradient(90deg,var(--c2),transparent)}
+.info-card.stay::before{background:linear-gradient(90deg,var(--c3),transparent)}
+.ic-label{font-size:.54em;text-transform:uppercase;letter-spacing:.5px;color:var(--dim)}
+.ic-route{font-size:.82em;font-weight:700;margin:3px 0 1px}
+.ic-price{font-size:1.2em;font-weight:900;color:var(--c1)}
+.info-card.t-back .ic-price{color:var(--c2)}
+.info-card.stay .ic-price{color:var(--c3);font-size:.84em}
+.ic-detail{font-size:.56em;color:var(--dim);margin-top:2px}
+/* Trip Flow */
+.trip-flow{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-radius:16px;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--bd);margin-bottom:16px;position:relative;overflow:hidden}
+.trip-flow::before{content:'';position:absolute;left:10%;right:10%;top:50%;height:2px;background:linear-gradient(90deg,var(--c3),var(--c1),var(--c2),var(--c4));opacity:.3}
+.tf-node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all .3s;flex:1}
+.tf-node:hover{transform:translateY(-3px)}
+.tf-dot{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1em;transition:all .3s;border:2px solid var(--bd);background:var(--bg)}
+.tf-node[data-d="1"] .tf-dot{border-color:var(--c3);background:rgba(245,158,11,.1)}
+.tf-node[data-d="2"] .tf-dot{border-color:var(--c1);background:rgba(6,182,212,.1)}
+.tf-node[data-d="3"] .tf-dot{border-color:var(--c2);background:rgba(139,92,246,.1)}
+.tf-node[data-d="4"] .tf-dot{border-color:var(--c4);background:rgba(16,185,129,.1)}
+.tf-node.active .tf-dot{transform:scale(1.2);box-shadow:0 0 0 4px rgba(255,255,255,.06),0 0 16px currentColor}
+.tf-node[data-d="1"].active .tf-dot{box-shadow:0 0 0 4px rgba(245,158,11,.15),0 0 16px var(--c3)}
+.tf-node[data-d="2"].active .tf-dot{box-shadow:0 0 0 4px rgba(6,182,212,.15),0 0 16px var(--c1)}
+.tf-node[data-d="3"].active .tf-dot{box-shadow:0 0 0 4px rgba(139,92,246,.15),0 0 16px var(--c2)}
+.tf-node[data-d="4"].active .tf-dot{box-shadow:0 0 0 4px rgba(16,185,129,.15),0 0 16px var(--c4)}
+.tf-label{font-size:.56em;font-weight:700;color:var(--dim);text-align:center}
+.tf-node.active .tf-label{color:var(--txt)}
+/* Day Header */
+.day-hdr{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:14px 16px;border-radius:16px;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--bd);position:relative;overflow:hidden}
+.day-hdr::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px}
+.day-hdr.d1::before{background:linear-gradient(180deg,var(--c3),var(--c5))}
+.day-hdr.d2::before{background:linear-gradient(180deg,var(--c1),var(--c2))}
+.day-hdr.d3::before{background:linear-gradient(180deg,var(--c2),var(--c5))}
+.day-hdr.d4::before{background:linear-gradient(180deg,var(--c4),var(--c1))}
+.dh-icon{font-size:2em;filter:drop-shadow(0 0 10px rgba(6,182,212,.3))}
+.dh-text{flex:1}
+.dh-title{font-size:.92em;font-weight:800}
+.dh-sub{font-size:.64em;color:var(--dim)}
+.dh-stats{display:flex;gap:8px}
+.dh-stat{display:flex;flex-direction:column;align-items:center;padding:6px 10px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--bd)}
+.dh-stat strong{font-size:1.15em;color:var(--c1);font-weight:900}
+.dh-stat label{font-size:.56em;color:var(--dim);text-transform:uppercase;letter-spacing:.3px}
+/* Activity Grid (2-col) */
+.act-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px}
+.act-card{border-radius:12px;padding:11px 13px;background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--bd);transition:all .35s;position:relative;cursor:default}
+.act-card:hover{transform:translateY(-4px);box-shadow:var(--sh);background:var(--card-h);border-color:rgba(6,182,212,.3)}
+.act-card.train{border-left:3px solid var(--c2)}
+.act-card.sunrise{border-left:3px solid var(--c3)}
+.act-card.rest{border-left:3px solid var(--c4)}
+.act-card.food{border-left:3px solid var(--c5)}
+.act-time{font-size:.62em;font-weight:700;color:var(--c1);background:rgba(6,182,212,.08);padding:1px 7px;border-radius:5px;display:inline-block;margin-bottom:4px}
+.act-card.train .act-time{color:var(--c2);background:rgba(139,92,246,.08)}
+.act-card.sunrise .act-time{color:var(--c3);background:rgba(245,158,11,.08)}
+.act-card.rest .act-time{color:var(--c4);background:rgba(16,185,129,.08)}
+.act-spot{font-size:.78em;font-weight:700;line-height:1.3}
+.act-desc{font-size:.6em;color:var(--dim);line-height:1.4;margin-top:3px}
+.act-meta{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.act-transport{font-size:.58em;color:var(--dim)}
+.act-budget{font-size:.66em;font-weight:800;color:var(--c4)}
+.act-budget.free{color:var(--c4);opacity:.5}
+.act-card.full{grid-column:span 2}
+/* Day Images */
+.day-imgs{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px;scroll-snap-type:x mandatory}
+.day-imgs::-webkit-scrollbar{height:3px}
+.day-imgs::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
+.day-imgs img{width:170px;height:105px;object-fit:cover;border-radius:12px;flex-shrink:0;scroll-snap-align:start;transition:all .35s;cursor:pointer;border:1px solid var(--bd)}
+.day-imgs img:hover{transform:scale(1.08);box-shadow:var(--sh);border-color:var(--c1)}
+/* Food */
+.food-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px}
+.food-row::-webkit-scrollbar{height:3px}
+.food-row::-webkit-scrollbar-thumb{background:var(--bd);border-radius:2px}
+.food-mini{flex:1;min-width:100px;border-radius:12px;padding:10px;background:var(--card);backdrop-filter:blur(10px);border:1px solid var(--bd);text-align:center;transition:all .3s}
+.food-mini:hover{transform:translateY(-3px);border-color:var(--c5);box-shadow:0 4px 16px rgba(236,72,153,.12)}
+.food-mini .fe{font-size:1.6em;margin-bottom:3px}
+.food-mini .fn{font-size:.68em;font-weight:700}
+.food-mini .fd{font-size:.52em;color:var(--dim);margin-top:2px}
+/* Alert */
+.alert-box{border-radius:16px;padding:16px;margin-bottom:14px;background:linear-gradient(135deg,rgba(59,130,246,.05),rgba(139,92,246,.05));border:1px solid rgba(59,130,246,.12);backdrop-filter:blur(12px);font-size:.74em;line-height:1.7;position:relative;overflow:hidden}
+.alert-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--c1),var(--c2))}
+.alert-box strong{color:var(--c2)}
+.alert-box li{margin-top:4px;list-style:none;padding-left:16px;position:relative}
+.alert-box li::before{content:'▸';position:absolute;left:0;color:var(--c1)}
+/* Sunrise */
+.sunrise-note{border-radius:16px;padding:16px;margin-bottom:14px;background:linear-gradient(135deg,rgba(245,158,11,.05),rgba(236,72,153,.03));border:1px solid rgba(245,158,11,.12);backdrop-filter:blur(12px);font-size:.74em;line-height:1.7;position:relative;overflow:hidden}
+.sunrise-note::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--c3),var(--c5))}
+.sunrise-note strong{color:var(--c3)}
+/* Checklist */
+.checklist{border-radius:16px;padding:16px;margin-bottom:14px;background:var(--card);backdrop-filter:blur(12px);border:1px solid var(--bd)}
+.cl-title{font-size:.78em;font-weight:800;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.cl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.cl-item{display:flex;align-items:center;gap:6px;padding:8px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid var(--bd);font-size:.64em;cursor:pointer;transition:all .3s;user-select:none}
+.cl-item:hover{background:var(--card-h)}
+.cl-item.done{opacity:.4;text-decoration:line-through}
+.cl-box{width:16px;height:16px;border-radius:4px;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .3s}
+.cl-item.done .cl-box{background:var(--c4);border-color:var(--c4)}
+.cl-box::after{content:'✓';color:#fff;font-size:.6em;opacity:0;transition:opacity .3s}
+.cl-item.done .cl-box::after{opacity:1}
+/* Accordion */
+.accordion{border-radius:16px;overflow:hidden;border:1px solid var(--bd);margin-bottom:14px}
+.acc-header{padding:14px 16px;background:var(--card);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.78em;transition:all .3s}
+.acc-header:hover{background:var(--card-h)}
+.acc-arrow{transition:transform .35s;font-size:1.1em}
+.acc-header.open .acc-arrow{transform:rotate(180deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+.acc-body-inner{padding:12px 16px;font-size:.72em;line-height:1.7;color:var(--dim)}
+.acc-body-inner strong{color:var(--txt)}
+.acc-body-inner li{list-style:none;padding-left:14px;position:relative;margin-top:4px}
+.acc-body-inner li::before{content:'◆';position:absolute;left:0;color:var(--c1);font-size:.7em}
+/* FAB */
+.budget-bar{border-radius:16px;padding:18px;margin-bottom:14px;background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--bd);position:relative;overflow:hidden}
+.budget-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--c4),var(--c1),var(--c2),var(--c3))}
+.bb-title{font-size:.86em;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+.bb-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.bb-item{text-align:center;padding:10px 4px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--bd)}
+.bb-label{font-size:.56em;color:var(--dim);text-transform:uppercase;letter-spacing:.3px}
+.bb-val{font-size:.92em;font-weight:800;color:var(--c1);margin-top:3px}
+.bb-item:nth-child(2) .bb-val{color:var(--c2)}
+.bb-item:nth-child(3) .bb-val{color:var(--c5)}
+.bb-item:nth-child(4) .bb-val{color:var(--c4)}
+.bb-breakdown{display:flex;gap:8px;margin-bottom:10px}
+.bb-row{flex:1;display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,.03);font-size:.66em;border:1px solid var(--bd)}
+.bb-row span:last-child{font-weight:700;color:var(--txt)}
+.bb-total{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;border-radius:12px;background:linear-gradient(135deg,var(--c4),#15803d);color:#fff}
+.bb-total span:first-child{font-size:.72em;opacity:.85;font-weight:600}
+.bb-amount{font-size:1.6em;font-weight:900}
+@media(max-width:520px){.bb-grid{grid-template-columns:repeat(2,1fr)}.bb-breakdown{flex-direction:column}}
+.fab{position:fixed;bottom:24px;right:24px;width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,var(--c1),var(--c2));border:none;color:#fff;font-size:1.5em;cursor:pointer;box-shadow:0 4px 24px rgba(6,182,212,.4);z-index:50;opacity:0;pointer-events:none;transform:translateY(20px) scale(.8);transition:all .35s}
+.fab.show{opacity:1;pointer-events:all;transform:translateY(0) scale(1)}
+.fab:hover{transform:scale(1.15) rotate(-15deg)}
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.open{opacity:1;pointer-events:all}
+.lightbox img{max-width:90%;max-height:80vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5);transform:scale(.9);transition:transform .3s}
+.lightbox.open img{transform:scale(1)}
+.lightbox .lb-close{position:absolute;top:20px;right:20px;color:#fff;font-size:1.8em;cursor:pointer;background:rgba(255,255,255,.1);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:none;transition:all .3s}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.2);transform:rotate(90deg)}
+/* Toast */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--card);backdrop-filter:blur(16px);border:1px solid var(--c4);border-radius:12px;padding:10px 22px;font-size:.74em;color:var(--txt);box-shadow:var(--sh);z-index:60;opacity:0;transition:all .35s;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* Day content */
+.day-content{display:none;animation:fadeSlide .5s cubic-bezier(.4,0,.2,1)}
+.day-content.active{display:block}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:520px){.hero-bg{height:180px}.hero-ov{padding:16px}.hero h1{font-size:1.25em}.act-grid{grid-template-columns:1fr}.act-card.full{grid-column:span 1}.cl-grid{grid-template-columns:repeat(2,1fr)}.dh-stats{display:none}.info-row{flex-direction:column}.tf-dot{width:30px;height:30px;font-size:.8em}.tf-label{font-size:.5em}}
+</style>
+</head>
+<body>
+<div class="aurora"><div></div></div>
+<div class="grid-bg"></div>
+<div class="particles" id="particles"></div>
+<div class="progress" id="progress"></div>
+<button class="fab" id="fab" onclick="goTop()">↑</button>
+<div class="toast" id="toast"></div>
+<div class="lightbox" id="lightbox" onclick="closeLB(event)"><button class="lb-close" onclick="closeLB()">✕</button><img id="lbImg" src=""></div>
+<svg style="position:absolute;width:0;height:0"><defs><linearGradient id="wg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#06b6d4"/><stop offset="50%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#10b981"/></linearGradient></defs></svg>
+<div class="app">
+
+<!-- Hero -->
+<div class="hero">
+  <img class="hero-bg" src="images/qingdao-beer-fest.jpg" alt="青岛">
+  <div class="hero-glow"></div>
+  <div class="hero-ov">
+    <div class="hero-badge">4天3晚</div>
+    <h1><span class="grad-text">青岛</span> 4 天 3 晚海边旅行</h1>
+    <div class="hero-sub">武汉出发 · 可复用攻略 · 暑期啤酒节期间</div>
+    <div class="hero-tags"><span>🌊 海滨风光</span><span>🏔️ 崂山仙境</span><span>🌅 八仙墩日出</span><span>🦐 海鲜美食</span><span>📸 老城漫步</span></div>
+  </div>
+</div>
+
+<!-- SVG Wave -->
+<svg class="wave" viewBox="0 0 680 30" preserveAspectRatio="none"><path d="M0,15 Q170,0 340,15 T680,15" fill="none" stroke="url(#wg)" stroke-width="2"/></svg>
+
+<!-- Transport + Stay -->
+<div class="sec-label">交通 & 住宿</div>
+<div class="info-row">
+  <div class="info-card t-go">
+    <div class="ic-label">🚄 去程</div>
+    <div class="ic-route">武汉站 → 青岛西站</div>
+    <div class="ic-price">¥498</div>
+    <div class="ic-detail">高铁 · 黄岛区，到市区约50min</div>
+  </div>
+  <div class="info-card t-back">
+    <div class="ic-label">🚄 回程</div>
+    <div class="ic-route">青岛西站 → 武汉站</div>
+    <div class="ic-price">¥493</div>
+    <div class="ic-detail">高铁 · 需提前1.5h出发</div>
+  </div>
+</div>
+<div class="info-card stay" style="margin-bottom:16px">
+  <div class="ic-label">🏨 住宿推荐</div>
+  <div class="ic-route">中山路 / 市南区</div>
+  <div class="ic-detail">出站步行5分钟到栈桥，Day2 全程步行游览，去哪都方便</div>
+</div>
+
+<!-- Trip Flow -->
+<div class="sec-label">行程概览</div>
+<div class="trip-flow" id="tripFlow">
+  <div class="tf-node active" data-d="1" onclick="switchDay(1)"><div class="tf-dot">🚄</div><div class="tf-label">Day 1<br>抵达</div></div>
+  <div class="tf-node" data-d="2" onclick="switchDay(2)"><div class="tf-dot">🏛️</div><div class="tf-label">Day 2<br>老城</div></div>
+  <div class="tf-node" data-d="3" onclick="switchDay(3)"><div class="tf-dot">🌊</div><div class="tf-label">Day 3<br>海岸</div></div>
+  <div class="tf-node" data-d="4" onclick="switchDay(4)"><div class="tf-dot">🌅</div><div class="tf-label">Day 4<br>日出</div></div>
+</div>
+
+<!-- Day 1 -->
+<div class="day-content active" id="day1">
+  <div class="day-hdr d1"><div class="dh-icon">🚄</div><div class="dh-text"><div class="dh-title">抵达青岛 · 轻松一晚</div><div class="dh-sub">放下行李，吃顿好的，早点休息</div></div><div class="dh-stats"><div class="dh-stat"><strong>5</strong><label>景点</label></div><div class="dh-stat"><strong>¥58</strong><label>当地</label></div></div></div>
+  <div class="act-grid">
+    <div class="act-card train full"><span class="act-time">10:56-17:50</span><div class="act-spot">🚄 武汉站 → 青岛西站</div><div class="act-desc">车上备好零食午餐，沿途欣赏风景</div><div class="act-meta"><span class="act-transport">🚄 高铁</span><span class="act-budget">¥498</span></div></div>
+    <div class="act-card"><span class="act-time">17:50</span><div class="act-spot">青岛西站 → 市区入住</div><div class="act-desc">地铁1号线转3号线约50min，或打车约40min</div><div class="act-meta"><span class="act-transport">🚇 地铁/🚕 打车</span><span class="act-budget">¥8</span></div></div>
+    <div class="act-card food"><span class="act-time">19:00</span><div class="act-spot">劈柴院晚餐</div><div class="act-desc">烤鱿鱼、鲅鱼水饺，随便吃吃早点休息</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥50</span></div></div>
+    <div class="act-card"><span class="act-time">20:00</span><div class="act-spot">栈桥散步</div><div class="act-desc">就在中山路尽头，看看夜景就好</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget free">免费</span></div></div>
+    <div class="act-card rest"><span class="act-time">20:30</span><div class="act-spot">回酒店休息 💤</div><div class="act-desc">明天全天暴走，早点养精蓄锐</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget free">—</span></div></div>
+  </div>
+  <div class="day-imgs"><img src="images/qingdao-zhanqiao.jpg" alt="栈桥" onclick="openLB(this)"><img src="images/qingdao-wusi.jpg" alt="夜景" onclick="openLB(this)"></div>
+</div>
+
+<!-- Day 2 -->
+<div class="day-content" id="day2">
+  <div class="day-hdr d2"><div class="dh-icon">🏛️</div><div class="dh-text"><div class="dh-title">中山路老城 · 经典全打卡</div><div class="dh-sub">全程步行，晚上五四广场灯光秀收尾</div></div><div class="dh-stats"><div class="dh-stat"><strong>11</strong><label>景点</label></div><div class="dh-stat"><strong>¥200</strong><label>当地</label></div></div></div>
+  <div class="act-grid">
+    <div class="act-card sunrise"><span class="act-time">05:00</span><div class="act-spot">🌅 石老人日出（可选）</div><div class="act-desc">日出约05:10，打车去石老人；不想早起可跳过</div><div class="act-meta"><span class="act-transport">🚕 打车</span><span class="act-budget">¥20</span></div></div>
+    <div class="act-card food"><span class="act-time">07:00</span><div class="act-spot">早餐</div><div class="act-desc">甜沫+油条+茶叶蛋</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥15</span></div></div>
+    <div class="act-card"><span class="act-time">08:00</span><div class="act-spot">栈桥（白天）</div><div class="act-desc">白天栈桥喂海鸥，回澜阁拍照</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget free">免费</span></div></div>
+    <div class="act-card"><span class="act-time">09:00</span><div class="act-spot">天主教堂（圣弥厄尔）</div><div class="act-desc">哥特式建筑拍照打卡</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget free">免费</span></div></div>
+    <div class="act-card"><span class="act-time">09:30</span><div class="act-spot">信号山公园</div><div class="act-desc">登顶360°俯瞰红瓦绿树、碧海蓝天</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥15</span></div></div>
+    <div class="act-card"><span class="act-time">10:30</span><div class="act-spot">琴屿路 → 小青岛</div><div class="act-desc">沿海漫步，白色灯塔打卡</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥15</span></div></div>
+    <div class="act-card"><span class="act-time">11:30</span><div class="act-spot">大学路 → 老舍故居</div><div class="act-desc">"最美转角"网红墙+老舍故居免费</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget free">免费</span></div></div>
+    <div class="act-card food"><span class="act-time">13:00</span><div class="act-spot">午餐</div><div class="act-desc">路边海鲜水饺店，避开网红店</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥40</span></div></div>
+    <div class="act-card"><span class="act-time">14:00</span><div class="act-spot">自由逛中山路 / 银鱼巷</div><div class="act-desc">百年老街逛文创店、咖啡馆</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥30</span></div></div>
+    <div class="act-card food"><span class="act-time">17:30</span><div class="act-spot">晚餐</div><div class="act-desc">船歌鱼水饺或路边海鲜</div><div class="act-meta"><span class="act-transport">🚇 地铁</span><span class="act-budget">¥60</span></div></div>
+    <div class="act-card full"><span class="act-time">19:00</span><div class="act-spot">五四广场 → 情人坝灯光秀</div><div class="act-desc">"五月的风"雕塑夜景+浮山湾灯光秀+奥帆中心</div><div class="act-meta"><span class="act-transport">🚇 地铁</span><span class="act-budget">¥5</span></div></div>
+  </div>
+  <div class="day-imgs"><img src="images/qingdao-zhanqiao.jpg" alt="栈桥" onclick="openLB(this)"><img src="images/qingdao-wusi.jpg" alt="五四广场" onclick="openLB(this)"><img src="images/qingdao-badaguan.jpg" alt="老城" onclick="openLB(this)"></div>
+  <div class="sec-label">🦐 今日美食</div>
+  <div class="food-row">
+    <div class="food-mini"><div class="fe">🦑</div><div class="fn">烤鱿鱼</div><div class="fd">劈柴院必吃</div></div>
+    <div class="food-mini"><div class="fe">🥟</div><div class="fn">鲅鱼水饺</div><div class="fd">皮薄馅大</div></div>
+    <div class="food-mini"><div class="fe">🍺</div><div class="fn">原浆扎啤</div><div class="fd">袋装灵魂</div></div>
+    <div class="food-mini"><div class="fe">☕</div><div class="fn">大学路咖啡</div><div class="fd">文艺歇脚</div></div>
+  </div>
+</div>
+
+<!-- Day 3 -->
+<div class="day-content" id="day3">
+  <div class="day-hdr d3"><div class="dh-icon">🌊</div><div class="dh-text"><div class="dh-title">海岸线南行 · 山海一色</div><div class="dh-sub">不走回头路，晚上台东夜市收尾</div></div><div class="dh-stats"><div class="dh-stat"><strong>7</strong><label>景点</label></div><div class="dh-stat"><strong>¥140</strong><label>当地</label></div></div></div>
+  <div class="act-grid">
+    <div class="act-card food"><span class="act-time">08:00</span><div class="act-spot">早餐</div><div class="act-desc">吃饱点，今天一路南行暴走</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥15</span></div></div>
+    <div class="act-card"><span class="act-time">09:00</span><div class="act-spot">小鱼山公园</div><div class="act-desc">登顶览青岛湾全景，比信号山人少</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥10</span></div></div>
+    <div class="act-card"><span class="act-time">10:00</span><div class="act-spot">第三海水浴场</div><div class="act-desc">踩水/沙滩漫步，免费</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget free">免费</span></div></div>
+    <div class="act-card"><span class="act-time">11:30</span><div class="act-spot">八大关风景区</div><div class="act-desc">花石楼外围拍照+第二海水浴场+公主楼</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget free">免费</span></div></div>
+    <div class="act-card food"><span class="act-time">14:00</span><div class="act-spot">午餐</div><div class="act-desc">八大关附近家常菜馆</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥45</span></div></div>
+    <div class="act-card"><span class="act-time">15:00</span><div class="act-spot">小麦岛公园</div><div class="act-desc">360°海景+灯塔+"孤独的树"，看日落绝佳</div><div class="act-meta"><span class="act-transport">🚌 公交</span><span class="act-budget">¥5</span></div></div>
+    <div class="act-card"><span class="act-time">17:00</span><div class="act-spot">石老人海水浴场</div><div class="act-desc">沙滩漫步+看日落</div><div class="act-meta"><span class="act-transport">🚌 公交</span><span class="act-budget">¥5</span></div></div>
+    <div class="act-card food"><span class="act-time">19:00</span><div class="act-spot">台东夜市 / 李村夜市</div><div class="act-desc">辣炒蛤蜊+烤生蚝+原浆扎啤</div><div class="act-meta"><span class="act-transport">🚇 地铁</span><span class="act-budget">¥60</span></div></div>
+    <div class="act-card rest full"><span class="act-time">21:00</span><div class="act-spot">⚠️ 回酒店早睡！</div><div class="act-desc">Day4 凌晨3点出发去八仙墩，务必早睡</div><div class="act-meta"><span class="act-transport">—</span><span class="act-budget free">—</span></div></div>
+  </div>
+  <div class="day-imgs"><img src="images/qingdao-badaguan.jpg" alt="八大关" onclick="openLB(this)"><img src="images/qingdao-xiaomaidao.jpg" alt="小麦岛" onclick="openLB(this)"><img src="images/qingdao-shilaoren.jpg" alt="石老人" onclick="openLB(this)"></div>
+  <div class="sec-label">🦐 今日美食</div>
+  <div class="food-row">
+    <div class="food-mini"><div class="fe">🐚</div><div class="fn">辣炒蛤蜊</div><div class="fd">夜市必点</div></div>
+    <div class="food-mini"><div class="fe">🦪</div><div class="fn">烤生蚝</div><div class="fd">蒜蓉碳烤</div></div>
+    <div class="food-mini"><div class="fe">🍤</div><div class="fn">家常海鲜</div><div class="fd">性价比高</div></div>
+    <div class="food-mini"><div class="fe">🍺</div><div class="fn">袋装啤酒</div><div class="fd">边走边喝</div></div>
+  </div>
+</div>
+
+<!-- Day 4 -->
+<div class="day-content" id="day4">
+  <div class="day-hdr d4"><div class="dh-icon">🌅</div><div class="dh-text"><div class="dh-title">八仙墩日出 · 崂山 · 返程</div><div class="dh-sub">凌晨出发，日出后崂山，中午赶火车</div></div><div class="dh-stats"><div class="dh-stat"><strong>4</strong><label>景点</label></div><div class="dh-stat"><strong>¥330</strong><label>当地</label></div></div></div>
+  <div class="act-grid">
+    <div class="act-card sunrise full"><span class="act-time">03:00</span><div class="act-spot">起床退房 · 带行李出发</div><div class="act-desc">提前在滴滴预约"预约用车"，行李放车上</div><div class="act-meta"><span class="act-transport">🚕 打车</span><span class="act-budget">—</span></div></div>
+    <div class="act-card sunrise"><span class="act-time">03:15</span><div class="act-spot">市区 → 青山渔村</div><div class="act-desc">打车约1h，导航"青山渔村海丰翔渔家宴"</div><div class="act-meta"><span class="act-transport">🚕 约50km</span><span class="act-budget">¥100</span></div></div>
+    <div class="act-card sunrise"><span class="act-time">04:15</span><div class="act-spot">夜爬至八仙墩 🔦</div><div class="act-desc">需头灯/手电！徒步约30-45min，7:00前过检查站免费</div><div class="act-meta"><span class="act-transport">🥾 徒步</span><span class="act-budget free">免费</span></div></div>
+    <div class="act-card sunrise full"><span class="act-time">05:10</span><div class="act-spot">🌅 八仙墩海上日出！</div><div class="act-desc">"崂山第一奇景"海峤仙墩，悬崖巨石+海上日出，绝美！</div><div class="act-meta"><span class="act-transport">—</span><span class="act-budget free">免费</span></div></div>
+    <div class="act-card"><span class="act-time">06:00</span><div class="act-spot">崂山太清宫（可选）</div><div class="act-desc">千年道观+山海一色；时间紧可跳过</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥0</span></div></div>
+    <div class="act-card food"><span class="act-time">07:30</span><div class="act-spot">农家宴早餐</div><div class="act-desc">清蒸鱼+海螺+王哥庄大馒头</div><div class="act-meta"><span class="act-transport">🚶 步行</span><span class="act-budget">¥50</span></div></div>
+    <div class="act-card"><span class="act-time">08:30</span><div class="act-spot">青山渔村 → 青岛西站</div><div class="act-desc">打车约1.5h，沿途环海公路风景绝佳</div><div class="act-meta"><span class="act-transport">🚕 约70km</span><span class="act-budget">¥150</span></div></div>
+    <div class="act-card"><span class="act-time">10:00</span><div class="act-spot">抵达青岛西站 · 候车</div><div class="act-desc">站内买早餐+超市采购伴手礼</div><div class="act-meta"><span class="act-transport">—</span><span class="act-budget">¥30</span></div></div>
+    <div class="act-card train full"><span class="act-time">发车</span><div class="act-spot">🚄 青岛西站 → 武汉站</div><div class="act-desc">车上补觉+午餐</div><div class="act-meta"><span class="act-transport">🚄 高铁</span><span class="act-budget">¥493</span></div></div>
+  </div>
+  <div class="day-imgs"><img src="images/laoshan.jpg" alt="崂山八仙墩" style="width:220px;height:105px" onclick="openLB(this)"></div>
+</div>
+
+<!-- SVG Wave -->
+<svg class="wave" viewBox="0 0 680 30" preserveAspectRatio="none"><path d="M0,15 Q170,30 340,15 T680,15" fill="none" stroke="url(#wg)" stroke-width="2"/></svg>
+
+<!-- 八仙墩 -->
+<div class="alert-box">
+  <strong>🔦 八仙墩日出注意事项</strong>
+  <ul>
+    <li><strong>路线</strong>：导航"青山渔村海丰翔渔家宴" → 沿右手边山路徒步至八仙墩，约30-45min</li>
+    <li><strong>时间</strong>：暑期日出约 05:10-05:25，需 04:15 开始徒步，03:00 从市区出发</li>
+    <li><strong>装备</strong>：必带头灯或强光手电（夜爬无路灯）、防滑鞋、薄外套</li>
+    <li><strong>门票</strong>：7:00 前通过流清河检查站免费进入，之后需购崂山门票</li>
+    <li><strong>行李</strong>：退房后行李放车上，与司机协商等候或包车（D4全程约 ¥300-400）</li>
+    <li><strong>💡 备选</strong>：Day3 晚住青山渔村民宿，Day4 只需 04:00 起床</li>
+  </ul>
+</div>
+
+<!-- Sunrise -->
+<div class="sunrise-note">
+  <strong>🌅 日出安排</strong>
+  <ul style="list-style:none">
+    <li style="padding-left:14px;position:relative;margin-top:4px"><span style="position:absolute;left:0">•</span><strong>Day2 石老人日出</strong>（可选）：城市海滩日出，方便返回继续游览</li>
+    <li style="padding-left:14px;position:relative;margin-top:4px"><span style="position:absolute;left:0">•</span><strong>Day4 八仙墩日出</strong>（重点）：崂山悬崖巨石上的海上日出，"崂山第一奇景"</li>
+  </ul>
+</div>
+
+<!-- Checklist -->
+<div class="checklist">
+  <div class="cl-title">🎒 出行清单（点击打勾）</div>
+  <div class="cl-grid">
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>身份证+学生证</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>高铁票往返</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>充电宝</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>防晒霜SPF50+</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>薄外套</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>头灯/手电</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>防滑运动鞋</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>墨镜+遮阳帽</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>泳衣+毛巾</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>雨伞备用</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>零食+水杯</div>
+    <div class="cl-item" onclick="toggleCheck(this)"><div class="cl-box"></div>晕车药</div>
+  </div>
+</div>
+
+<!-- Budget -->
+<div class="budget-bar">
+  <div class="bb-title">💰 总预算</div>
+  <div class="bb-grid">
+    <div class="bb-item"><div class="bb-label">Day 1</div><div class="bb-val">¥556</div></div>
+    <div class="bb-item"><div class="bb-label">Day 2</div><div class="bb-val">¥200</div></div>
+    <div class="bb-item"><div class="bb-label">Day 3</div><div class="bb-val">¥140</div></div>
+    <div class="bb-item"><div class="bb-label">Day 4</div><div class="bb-val">¥823</div></div>
+  </div>
+  <div class="bb-breakdown">
+    <div class="bb-row"><span>🚄 高铁往返</span><span>¥991</span></div>
+    <div class="bb-row"><span>📍 当地花费</span><span>¥728</span></div>
+  </div>
+  <div class="bb-total">
+    <span>全程总计</span>
+    <span class="bb-amount">¥1,719</span>
+  </div>
+</div>
+
+<!-- Tips -->
+<div class="accordion">
+  <div class="acc-header" onclick="toggleAcc(this)">📌 实用贴士 <span class="acc-arrow">▾</span></div>
+  <div class="acc-body"><div class="acc-body-inner">
+    <ul>
+      <li><strong>青岛西站≠青岛站</strong>：青岛西站在黄岛区，离市区约50min车程</li>
+      <li><strong>Day1</strong> 到达后轻松吃个饭、看看栈桥夜景就好，明天才是重头戏</li>
+      <li><strong>Day2</strong> 中山路片区景点密集，全程步行，晚上五四广场灯光秀收尾</li>
+      <li><strong>Day3</strong> 海岸线一路南行：小鱼山→八大关→小麦岛→石老人，不走回头路</li>
+      <li><strong>Day4</strong> 八仙墩日出→太清宫（可选）→农家宴→打车直奔青岛西站</li>
+      <li>D4凌晨务必提前在滴滴预约用车，3点很难路边拦车</li>
+      <li>台东夜市：买海鲜找旁边店加工，啤酒用塑料袋装喝</li>
+      <li>暑期青岛均温 26°C，带防晒霜、薄外套和头灯</li>
+    </ul>
+  </div></div>
+</div>
+
+</div>
+<script>
+// Particles
+for(var i=0;i<25;i++){var s=document.createElement('span');var sz=Math.random()*5+2;s.style.width=sz+'px';s.style.height=sz+'px';s.style.left=Math.random()*100+'%';s.style.animationDuration=Math.random()*15+12+'s';s.style.animationDelay=Math.random()*15+'s';s.style.opacity=Math.random()*.35+.08;document.getElementById('particles').appendChild(s)}
+// Scroll
+window.addEventListener('scroll',function(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  var p=(window.scrollY/h)*100;
+  document.getElementById('progress').style.width=p+'%';
+  var fab=document.getElementById('fab');
+  if(window.scrollY>300){fab.classList.add('show')}else{fab.classList.remove('show')}
+});
+function goTop(){window.scrollTo({top:0,behavior:'smooth'})}
+// Day switch
+function switchDay(n){
+  document.querySelectorAll('.tf-node').forEach(function(b){b.classList.remove('active')});
+  document.querySelector('.tf-node[data-d="'+n+'"]').classList.add('active');
+  document.querySelectorAll('.day-content').forEach(function(c){c.classList.remove('active')});
+  document.getElementById('day'+n).classList.add('active');
+  var labels={1:'抵达青岛',2:'中山路老城',3:'海岸线南行',4:'八仙墩日出'};
+  showToast('Day '+n+' · '+labels[n]);
+}
+// Accordion
+function toggleAcc(el){
+  var body=el.nextElementSibling;
+  if(body.style.maxHeight&&body.style.maxHeight!=='0px'){body.style.maxHeight='0';el.classList.remove('open')}
+  else{body.style.maxHeight=body.scrollHeight+'px';el.classList.add('open')}
+}
+// Checklist
+function toggleCheck(el){
+  el.classList.toggle('done');
+  var done=document.querySelectorAll('.cl-item.done').length;
+  var total=document.querySelectorAll('.cl-item').length;
+  if(done===total){showToast('🎉 全部打包完成！出发！')}
+  else{showToast(done+'/'+total+' 已打包')}
+}
+// Lightbox
+function openLB(img){
+  var lb=document.getElementById('lightbox');
+  document.getElementById('lbImg').src=img.src;
+  lb.classList.add('open');
+}
+function closeLB(e){if(!e||e.target===e.currentTarget||e.target.classList.contains('lb-close'))document.getElementById('lightbox').classList.remove('open')}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lightbox').classList.remove('open')});
+// Toast
+var toastTimer;
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.classList.remove('show')},2500);
+}
+// Scroll Reveal
+var observer=new IntersectionObserver(function(entries){
+  entries.forEach(function(e,idx){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}})
+},{threshold:0.08});
+document.querySelectorAll('.act-card,.alert-box,.sunrise-note,.accordion,.food-mini,.cl-item,.day-hdr,.info-card,.trip-flow,.wave,.budget-bar,.bb-item').forEach(function(el){
+  el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity .55s,transform .55s';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
